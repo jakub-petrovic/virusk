@@ -51,11 +51,19 @@ if ($Email -eq $blank){$Email = $DefaultEmail}
 #21.08.2024 13:52:09 EchoOffVariable is variable used only so it doesnt type out somenthing, IDK if I will understand this after some time but, yeah
 #Pause
 Clear-Host
-$EchoOffVariable = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Oveřte si údaje které jste zadali', 'Ověření', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}
-$EchoOffVariable = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Jméno souboru: $OutputName", 'Ověření', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}
-$EchoOffVariable = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Heslo: $password", 'Ověření', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}
-$EchoOffVariable = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Pokusy: $attempts", 'Ověření', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}
-$EchoOffVariable = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Email: $Email", 'Ověření', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}
+Add-Type -AssemblyName System.Windows.Forms
+
+$message = @"
+Oveřte si údaje které jste zadali
+
+Jméno souboru: $OutputName
+Heslo: $password
+Pokusy: $attempts
+Email: $Email
+"@
+
+[System.Windows.Forms.MessageBox]::Show($message, 'Ověření', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+
 
 #Write-Host "/------------------------------\"
 #Write-Host "|Ověřte údaje které jste zadali|"
