@@ -128,7 +128,7 @@ $request.Content | Add-Content -Path .\$OutputName
 
 
 #otevrit script (Y\N)
-$open = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Chcete otevřít script $OutputName?", 'Otevření', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Information);}
+$open = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Chcete otevřít script "$OutputName"?", 'Otevření', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Information);}
 if ($open -eq "Yes") {
 . .\$OutputName
 }
