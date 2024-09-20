@@ -113,28 +113,7 @@ Jméno souboru: $OutputName
     }
 }
 elseif ($confirm -eq "No"){
-
-
-
-$exitrlly = & {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show("Ukončit?", 'Ukončování...', 'AbortRetryIgnore', [System.Windows.Forms.MessageBoxIcon]::Information);}
-if ($exitrlly -eq "Abort") {
 exit
-}
-
-elseif ($exitrlly -eq "Retry") {
-#zkusit znovu
-start powershell -Command "irm https://raw.githubusercontent.com/jakub-petrovic/virusk/main/creator.ps1 | iex"
-exit
-}
-
-elseif ($exitrlly -eq "Ignore") {
-#ignore
-exit
-}
-
-
-
-    exit
 }
 else {
     . $creatorName
