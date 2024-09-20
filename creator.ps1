@@ -60,9 +60,9 @@ Clear-Host
 Add-Type -AssemblyName System.Windows.Forms
 
 $message = @"
-/----------------------------------------------------------\
-|Ověřte údaje které jste zadali|
-\----------------------------------------------------------/
+ /---------------\
+| Ověřte si údaje |
+ \---------------/
 
 
 Jméno souboru: $OutputName
